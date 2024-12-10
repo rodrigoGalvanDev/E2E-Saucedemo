@@ -1,0 +1,19 @@
+import { Page } from '@playwright/test';
+
+export default class LoginPage {
+
+    //Selectores
+    constructor(private page: Page) { }
+
+    async navigateToThePage() {
+        await this.page.goto('https://www.saucedemo.com/v1/')
+    }
+
+    async loginWithCredentials() {
+        await this.page.getByRole('textbox', { name: 'Username' }).fill('standard_user')
+        await this.page.getByRole('textbox', { name: 'Password' }).fill('secret_sauce')
+        await this.page.getByRole('button', { name: "LOGIN" }).click()
+    }
+
+
+}
