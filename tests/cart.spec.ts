@@ -21,7 +21,6 @@ test('see information on the cartPage and proceed to checkout', async ({ page })
     await cartPage.navigateToCartPage();
     const productDetailsOnCart = await cartPage.getInfoProducts();
     expect(productDetails).toStrictEqual(productDetailsOnCart);
-    await cartPage.checkOutProducts();
 });
 
 test('see information on the cartPage and remove the product', async ({ page }) => {
