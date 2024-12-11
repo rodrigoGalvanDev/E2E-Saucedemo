@@ -15,8 +15,6 @@ test('add an item to the cart', async ({ page }) => {
     const product = await inventoryPage.selectRandomProduct(allProducts)
     await inventoryPage.addCartRandomProduct(product)
     const productDetails = await inventoryPage.getProductDetails(product)
-
-    console.log(`Se ha añadido un producto al carrito. Nombre: ${productDetails.name}, Precio: ${productDetails.price}`)
     
     const countOfItemsOnCart = await inventoryPage.getCartItemCount();
     expect(countOfItemsOnCart).toBe('1')

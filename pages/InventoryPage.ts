@@ -10,7 +10,7 @@ export default class InventoryPage {
     }
 
     async selectRandomProduct(allProducts: Locator[]){
-        const randomIndex = Math.floor(Math.random() * allProducts.length)
+        const randomIndex =  Math.floor(Math.random() * allProducts.length)
         return allProducts[randomIndex]
     }
 
@@ -21,7 +21,7 @@ export default class InventoryPage {
     }
 
     async addCartRandomProduct(product: Locator){
-        await product.locator('.btn_primary').click()
+        await product.getByRole('button', {name: 'ADD TO CART'}).click();
     }
 
     async getCartItemCount(){

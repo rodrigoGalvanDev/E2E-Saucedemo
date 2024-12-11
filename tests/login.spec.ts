@@ -4,8 +4,8 @@ import LoginPage from '../pages/LoginPage';
 test('login with valid credentials', async ({ page }) => {
 
     const loginPage = new LoginPage(page)
-    loginPage.navigateToThePage()
-    loginPage.loginWithCredentials()
+    await loginPage.navigateToThePage()
+    await loginPage.loginWithCredentials()
 
     await expect(page.locator('.product_label')).toBeVisible();
 
@@ -14,8 +14,8 @@ test('login with valid credentials', async ({ page }) => {
 test('trying to login with invalid credentials', async ({ page }) => {
 
     const loginPage = new LoginPage(page)
-    loginPage.navigateToThePage()
-    loginPage.tryToLoginWithWrongCredentials()
+    await loginPage.navigateToThePage()
+    await loginPage.tryToLoginWithWrongCredentials()
 
     await expect(page.locator('.error-button')).toBeVisible();
 

@@ -37,6 +37,7 @@ test('see information on the cartPage and remove the product', async ({ page }) 
 
     const cartPage = new CartPage(page);
     await cartPage.navigateToCartPage();
+    await expect (page.locator('.cart_item')).toBeVisible()
     await cartPage.removeProduct()
-    expect(page.locator('.cart_item')).toBeHidden();
+    await expect (page.locator('.cart_item')).toBeHidden()
 });
