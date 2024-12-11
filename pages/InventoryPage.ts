@@ -17,7 +17,7 @@ export default class InventoryPage {
     async getProductDetails(product: Locator){
         const productName = await product.locator('.inventory_item_name').innerText();
         const productPrice = await product.locator('.inventory_item_price').innerText()
-        return {name: productName, productPrice}
+        return {name: productName, price: productPrice.replace('$', '')}
     }
 
     async addCartRandomProduct(product: Locator){
