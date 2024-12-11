@@ -15,5 +15,10 @@ export default class LoginPage {
         await this.page.getByRole('button', { name: "LOGIN" }).click()
     }
 
+    async tryToLoginWithWrongCredentials(){
+        await this.page.getByRole('textbox', { name: 'Username' }).fill('locked_out_user')
+        await this.page.getByRole('textbox', { name: 'Password' }).fill('secret_sauce')
+        await this.page.getByRole('button', { name: "LOGIN" }).click()
+    }
 
 }

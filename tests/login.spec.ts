@@ -11,4 +11,14 @@ test('login with valid credentials', async ({ page }) => {
 
 });
 
+test('trying to login with invalid credentials', async ({ page }) => {
+
+    const loginPage = new LoginPage(page)
+    loginPage.navigateToThePage()
+    loginPage.tryToLoginWithWrongCredentials()
+
+    await expect(page.locator('.error-button')).toBeVisible();
+
+});
+
 
