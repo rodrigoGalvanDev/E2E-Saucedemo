@@ -3,7 +3,7 @@ import { Page } from '@playwright/test';
 export default class LoginPage {
 
     //Selectores
-    constructor(private page: Page) { }
+    constructor(private page: Page) {}
 
     async navigateToThePage() {
         await this.page.goto('https://www.saucedemo.com/v1/')
