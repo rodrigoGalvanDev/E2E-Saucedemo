@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 import LoginPage from '../pages/LoginPage';
 import InventoryPage from '../pages/InventoryPage';
-import CartPage from '../pages/cartPage';
+import CartPage from '../pages/CartPage';
 import CheckOutPage from '../pages/CheckOutPage';
 
 test('do all the checkout process and finalize the purchase', async ({ page }) => {
