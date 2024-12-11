@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test"
+import { Page } from "@playwright/test"
 
 export default class InventoryPage {
 
@@ -10,6 +10,10 @@ export default class InventoryPage {
         const anItem = allItems[Math.floor(Math.random() * allItems.length)];
         await anItem.locator('.btn_primary').click()
         return anItem
+    }
+
+    async getCartItemCount(){
+        return await this.page.locator('.fa-layers-counter').innerText();
     }
 
 

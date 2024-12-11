@@ -12,7 +12,8 @@ test('add an item to the cart', async ({ page }) => {
     const inventoryPage = new InventoryPage(page)
     await inventoryPage.addCartRandomItem()
 
-    const countOfItemsOnCart = await page.locator('//span[@class = "fa-layers-counter shopping_cart_badge"]').innerText()
-    expect(countOfItemsOnCart).toBe('1')
+    
+    const countOfItemsOnCart = await inventoryPage.getCartItemCount();
+    expect(countOfItemsOnCart).toBe('7')
 
 });
