@@ -2,6 +2,13 @@ import { Page } from "@playwright/test"
 
 export default class CheckOutPage {
 
+    //Selectors
+    private nameProduct: string = '.inventory_item_name';
+    private priceProduct: string = '.inventory_item_price';
+    private finalPriceProduct: string = '.summary_total_label'
+    private buttonError: string = '.error-button'
+    private headerFinishPurchase: string = '.complete-header'
+
     constructor(private page: Page) { }
 
     async putMyInformation(name: string, lastname: string, zipcode: string) {
@@ -16,26 +23,26 @@ export default class CheckOutPage {
     }
 
     async getProductDetails() {
-        const productName = await this.page.locator('.inventory_item_name').innerText()
-        const productPrice = await this.page.locator('.inventory_item_price').innerText()
+        const productName = await this.page.locator(this.nameProduct).innerText()
+        const productPrice = await this.page.locator(this.priceProduct).innerText()
         return { name: productName, price: productPrice.replace('$','') };
     }
 
     async addingTaxesToPrice(){
-        const productPrice =  parseFloat((await this.page.locator('.inventory_item_price').innerText()).replace('$',''))
+        const productPrice =  parseFloat((await this.page.locator(this.priceProduct).innerText()).replace('$',''))
         const finalProductPrice = productPrice + (productPrice * 0.08);
         return finalProductPrice
     }
 
     async checkFinalPrice(){
-        return parseFloat((await this.page.locator('.summary_total_label').innerText()).replace('Total: $', ''))
+        return parseFloat((await this.page.locator(this.finalPriceProduct).innerText()).replace('Total: $', ''))
     }
 
     async checkUncessfulCheckOut(){
-        return await this.page.locator('.error-button').isVisible();
+        return await this.page.locator(this.buttonError).isVisible();
     }
 
     async checkSuccessfulPurchase(){
-        return await this.page.locator('.complete-header').isVisible();
+        return await this.page.locator(this.headerFinishPurchase).isVisible();
     }
 }

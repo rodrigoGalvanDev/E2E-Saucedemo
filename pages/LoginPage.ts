@@ -2,7 +2,10 @@ import { Page } from '@playwright/test';
 
 export default class LoginPage {
 
-    //Selectores
+    //Selectors
+    private productLabel: string = '.product_label';
+    private errorButton: string = '.error-button';
+
     constructor(private page: Page) {}
 
     async navigateToThePage() {
@@ -22,11 +25,11 @@ export default class LoginPage {
     }
 
     async checkSuccessfulLogin(){
-        return await this.page.locator('.product_label').isVisible();
+        return await this.page.locator(this.productLabel).isVisible();
     }
 
     async checkUnsuccessfulLogin(){
-        return await this.page.locator('.error-button').isVisible();
+        return await this.page.locator(this.errorButton).isVisible();
     }
 
 }

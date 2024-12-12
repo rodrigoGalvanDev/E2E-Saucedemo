@@ -2,11 +2,16 @@ import { Locator, Page } from "@playwright/test"
 
 export default class InventoryPage {
 
+    //Selectors
+    private allProducts: string = '.inventory_item';
+    private nameProduct: string = '.inventory_item_name';
+    private priceProduct: string = '.inventory_item_price';
+    private counterCart: string = '.fa-layers-counter'
 
     constructor(private page: Page){}
 
     async getAllProducts(){
-        return await this.page.locator('.inventory_item').all();
+        return await this.page.locator(this.allProducts).all();
     }
 
     async selectRandomProduct(allProducts: Locator[]){
@@ -15,8 +20,8 @@ export default class InventoryPage {
     }
 
     async getProductDetails(product: Locator){
-        const productName = await product.locator('.inventory_item_name').innerText();
-        const productPrice = await product.locator('.inventory_item_price').innerText()
+        const productName = await product.locator(this.nameProduct).innerText();
+        const productPrice = await product.locator(this.priceProduct).innerText()
         return {name: productName, price: productPrice.replace('$', '')}
     }
 
@@ -25,7 +30,7 @@ export default class InventoryPage {
     }
 
     async getCartItemCount(){
-        return await this.page.locator('.fa-layers-counter').innerText();
+        return await this.page.locator(this.counterCart).innerText();
     }
 
 
