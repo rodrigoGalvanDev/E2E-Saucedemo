@@ -7,7 +7,8 @@ test('login with valid credentials', async ({ page }) => {
     await loginPage.navigateToThePage()
     await loginPage.loginWithCredentials()
 
-    await expect(page.locator('.product_label')).toBeVisible();
+    const checkSuccessfulLogin = await loginPage.checkSuccessfulLogin();
+    expect(checkSuccessfulLogin).toBe(true);
 
 });
 
@@ -17,7 +18,8 @@ test('trying to login with invalid credentials', async ({ page }) => {
     await loginPage.navigateToThePage()
     await loginPage.tryToLoginWithWrongCredentials()
 
-    await expect(page.locator('.error-button')).toBeVisible();
+    const checkUnsuccessfulLogin = await loginPage.checkUnsuccessfulLogin()
+    expect(checkUnsuccessfulLogin).toBe(true);
 
 });
 

@@ -21,4 +21,12 @@ export default class LoginPage {
         await this.page.getByRole('button', { name: "LOGIN" }).click()
     }
 
+    async checkSuccessfulLogin(){
+        return await this.page.locator('.product_label').isVisible();
+    }
+
+    async checkUnsuccessfulLogin(){
+        return await this.page.locator('.error-button').isVisible();
+    }
+
 }
