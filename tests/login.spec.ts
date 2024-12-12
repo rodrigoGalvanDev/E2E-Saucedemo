@@ -18,8 +18,7 @@ test('trying to login with invalid credentials', async ({ page }) => {
     await loginPage.navigateToThePage()
     await loginPage.tryToLoginWithWrongCredentials()
 
-    const checkUnsuccessfulLogin = await loginPage.checkUnsuccessfulLogin()
-    expect(checkUnsuccessfulLogin).toBe(true);
+    expect(await loginPage.checkUnsuccessfulLogin()).toBe(true);
 
 });
 

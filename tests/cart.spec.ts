@@ -4,7 +4,7 @@ import LoginPage from '../pages/LoginPage';
 import CartPage from '../pages/CartPage';
 
 
-test('see information on the cartPage and proceed to checkout', async ({ page }) => {
+test('see if the product was correctly added and proceed to checkout', async ({ page }) => {
 
 
     const loginPage = new LoginPage(page);
@@ -21,6 +21,7 @@ test('see information on the cartPage and proceed to checkout', async ({ page })
     await cartPage.navigateToCartPage();
     const productDetailsOnCart = await cartPage.getInfoProducts();
     expect(productDetails).toStrictEqual(productDetailsOnCart);
+    await cartPage.checkOutProducts()
 });
 
 test('see information on the cartPage and remove the product', async ({ page }) => {
@@ -37,7 +38,7 @@ test('see information on the cartPage and remove the product', async ({ page }) 
 
     const cartPage = new CartPage(page);
     await cartPage.navigateToCartPage();
-    await expect (page.locator('.cart_item')).toBeVisible()
     await cartPage.removeProduct()
-    await expect (page.locator('.cart_item')).toBeHidden()
+
+    expect (await cartPage.checkProductWasRemoved()).toBe(true)
 });

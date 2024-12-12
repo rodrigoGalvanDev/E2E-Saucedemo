@@ -18,6 +18,10 @@ export default class CartPage {
         await this.page.getByRole('button', { name: 'REMOVE' }).click();
     }
 
+    async checkProductWasRemoved(){
+        return await this.page.locator('.cart_item').isHidden()
+    }
+
     async checkOutProducts() {
         await this.page.getByRole('link', { name: 'CHECKOUT' }).click();
     }
