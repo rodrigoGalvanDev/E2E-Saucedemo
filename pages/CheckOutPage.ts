@@ -26,4 +26,16 @@ export default class CheckOutPage {
         const finalProductPrice = productPrice + (productPrice * 0.08);
         return finalProductPrice
     }
+
+    async checkFinalPrice(){
+        return parseFloat((await this.page.locator('.summary_total_label').innerText()).replace('Total: $', ''))
+    }
+
+    async checkUncessfulCheckOut(){
+        return await this.page.locator('.error-button').isVisible();
+    }
+
+    async checkSuccessfulPurchase(){
+        return await this.page.locator('.complete-header').isVisible();
+    }
 }

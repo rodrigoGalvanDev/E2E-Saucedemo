@@ -22,9 +22,9 @@ test('do all the checkout process and finalize the purchase', async ({ page }) =
     const checkOutPage = new CheckOutPage(page);
     await checkOutPage.putMyInformation("John", "Doe", "1000");
     const priceIncludingTaxes = await checkOutPage.addingTaxesToPrice();
-    expect(parseFloat((await page.locator('.summary_total_label').innerText()).replace('Total: $', ''))).toBeCloseTo(priceIncludingTaxes)
+    expect(await checkOutPage.checkFinalPrice()).toBeCloseTo(priceIncludingTaxes)
     await checkOutPage.finalizePurchase();
-    await expect(page.locator('.complete-header')).toBeVisible()
+    expect(await checkOutPage.checkSuccessfulPurchase()).toBe(true)
 
 })
 
@@ -45,7 +45,7 @@ test('putting wrong infomation on check out', async ({ page }) => {
 
     const checkOutPage = new CheckOutPage(page);
     await checkOutPage.putMyInformation("", "", "");
-    await expect(page.locator('.error-button')).toBeVisible();
+    expect(await checkOutPage.checkUncessfulCheckOut()).toBe(true);
 
 })
 
