@@ -1,24 +1,16 @@
-import { test, expect } from '@playwright/test';
-import LoginPage from '@pages/LoginPage';
+import { test, expect } from '@tests/fixture-logIn';
+import LoginPage from '@pages/logIn-page';
 
-test('login with valid credentials', async ({ page }) => {
-
-    const loginPage = new LoginPage(page)
-    await loginPage.navigateToThePage()
-    await loginPage.loginWithCredentials()
-
-    const checkSuccessfulLogin = await loginPage.checkSuccessfulLogin();
-    expect(checkSuccessfulLogin).toBe(true);
-
+test('login with valid credentials', async ({ loginPage }) => {
+  expect(await loginPage.checkSuccessfulLogin()).toBe(true);
 });
 
 test('trying to login with invalid credentials', async ({ page }) => {
+  const loginPage = new LoginPage(page)
+  await loginPage.navigateToThePage()
+  await loginPage.tryToLoginWithWrongCredentials()
 
-    const loginPage = new LoginPage(page)
-    await loginPage.navigateToThePage()
-    await loginPage.tryToLoginWithWrongCredentials()
-
-    expect(await loginPage.checkUnsuccessfulLogin()).toBe(true);
+  expect(await loginPage.checkUnsuccessfulLogin()).toBe(true);
 
 });
 
